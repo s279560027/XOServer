@@ -1,5 +1,6 @@
 # XOServer
 Methods
+
 script?method=start&human={<int 0|1>}
 
 script?method=find
