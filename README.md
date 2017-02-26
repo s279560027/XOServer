@@ -1,6 +1,6 @@
 # XOServer
 Methods
-\\server/?method=start&human={<int 0|1>} 
+\\server/?method=start&human={<int 0|1>}
 return json {
   id : <int>, 
   human : <int 0|1>, 
