@@ -117,7 +117,7 @@ class XOServer
     {
         $stmt = self::$db->prepare("SELECT id FROM game WHERE human = 1 AND closed = 0 AND filled != 1");
         $stmt->execute();
-        $id = $stmt->fetch(\PDO::FETCH_ASSOC)['id'];
+        $id = $stmt->fetchColumn(0);
 
         if (!$id) {
             return new \stdClass();
