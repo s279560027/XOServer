@@ -116,7 +116,7 @@ class XOServer
     private function actionFind()
     {
         $stmt = self::$db->prepare("SELECT id FROM game WHERE human = 1 AND closed = 0 AND filled != 1");
-        $stmt->execute(array($this->GAME_TIMEOUT));
+        $stmt->execute();
         $id = $stmt->fetch(\PDO::FETCH_ASSOC)['id'];
 
         if (!$id) {
