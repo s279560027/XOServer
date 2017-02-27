@@ -1,4 +1,6 @@
 # XOServer
+Сервер для игры в крестики-нолики
+
 Methods
 
 script?method=start&human={int 0|1}
