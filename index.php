@@ -295,7 +295,7 @@ class XOGame
     public function __construct($id = 0)
     {
         if (!$id) {
-            return $this;
+            throw new XOGameException(self::ERROR_GAME_NOT_EXIST);
         }
         $stmt = XOServer::$db->prepare("SELECT * FROM game WHERE id = ?");
         $stmt->execute(array($id));
@@ -304,8 +304,6 @@ class XOGame
         $stmt = XOServer::$db->prepare("SELECT x + y * 3 `key`, `type` FROM move WHERE game_id = ? ORDER BY x, y");
         $stmt->execute(array($id));
         $this->state = array_replace(array_fill(0, 9, ''), $stmt->fetchAll(\PDO::FETCH_KEY_PAIR));
-
-        return $this;
     }
 
     public function update()
@@ -328,7 +326,6 @@ class XOGame
 
     public function create()
     {
-
         $this->params = array_replace(
             array(
                 'closed' => 0,
@@ -340,7 +337,6 @@ class XOGame
         );
 
         $this->state = array_fill(0, 9, '');
-
 
         $currentSessionSymbol = rand(0, 1) ? 'x' : 'o';
         $this->params[$currentSessionSymbol . '_session'] = session_id();
@@ -367,7 +363,6 @@ class XOGame
         $x = intval($x);
         $y = intval($y);
         $type = count(array_filter($this->state)) % 2 == 0 ? 'x' : 'o';
-
 
         if (!$type) {
             throw new XOGameException(self::ERROR_INVALID_MOVE);
@@ -409,7 +404,6 @@ class XOGame
             )) == 9;
 
         return $isWin ? $isWin : ($isEnd ? 0 : -1);
-
     }
 
     public function setCompMove($first = false)
